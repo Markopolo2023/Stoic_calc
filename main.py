@@ -48,6 +48,27 @@ class StoichApp:
         self.root = root
         self.root.title("Chemical Stoichiometry Balancer")
 
+        # Add notes about formula entry
+        notes_text = """
+Formula Entry Rules:
+- Enter chemical formulas in linear notation, e.g., H2O, C6H12O6, (NH4)2SO4.
+- Elements: Start with uppercase letter, optional lowercase (e.g., Na, Cl).
+- Counts: Numbers after elements or groups (default 1 if omitted).
+- Groups: Use parentheses (), brackets [], or braces {} for subgroups, followed by optional count.
+- Nested groups are supported.
+- No spaces; invalid characters are skipped, but avoid them to prevent errors.
+
+Special Cases:
+- Ensure parentheses are balanced; unbalanced will raise an error.
+- For hydrates, use dot notation if needed, but parser treats '.' as invalid (skip), so use groups instead, e.g., CuSO4(H2O)5.
+- Examples: Al2(SO4)3, [Co(NH3)6]Cl3, C6H5OH.
+"""
+        tk.Label(root, text="Notes on Formula Syntax:", font=("Arial", 12, "bold")).pack()
+        notes = tk.Text(root, height=15, width=60, wrap=tk.WORD)
+        notes.insert(tk.END, notes_text.strip())
+        notes.config(state=tk.DISABLED)
+        notes.pack()
+
         tk.Label(root, text="Number of reactants:").pack()
         self.num_entry = tk.Entry(root)
         self.num_entry.pack()
