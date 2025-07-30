@@ -37,7 +37,7 @@ def parse_formula(formula):
             for e in current:
                 stack[-1][e] = stack[-1].get(e, 0) + current[e]
         else:
-            i += 1  # skip invalid
+            i += 1
     if len(stack) != 1:
         raise ValueError("Unbalanced parentheses in formula")
     return stack[0]
@@ -48,7 +48,7 @@ class StoichApp:
         self.root = root
         self.root.title("Chemical Stoichiometry Balancer")
 
-        # Add notes about formula entry
+        # Add notes about formula entry to main window
         notes_text = """
 Formula Entry Rules:
 - Enter chemical formulas in linear notation, e.g., H2O, C6H12O6, (NH4)2SO4.
@@ -183,8 +183,7 @@ Special Cases:
         else:
             text += " (no leftovers)"
 
-        # Create image with rough size estimation
-        width = len(text) * 8 + 20  # approximate
+        width = len(text) * 8 + 20
         img = Image.new('RGB', (width, 50), color='white')
         d = ImageDraw.Draw(img)
         d.text((10, 10), text, fill='black')
